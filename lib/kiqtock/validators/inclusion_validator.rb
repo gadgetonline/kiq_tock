@@ -1,0 +1,13 @@
+# frozen_string_literal: true
+
+module Kiqtock
+  module Validators
+    class InclusionValidator
+      VALID_VALUES = []
+
+      def self.valid?(_value)
+        self::VALID_VALUES.empty? || self::VALID_VALUES.include?(value)
+      end
+    end
+  end
+end
