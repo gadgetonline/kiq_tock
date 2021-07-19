@@ -1,0 +1,5 @@
+sample_job_with_cron_syntax:
+  description: This is a sample job
+  job: SampleJob
+  retries: 2
+  schedule: 0 * * * *

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module Kiqtock
   RSpec.describe Parser do
     let(:numbers)             { '0-10,11,12' }
