@@ -1,16 +1,53 @@
-name: Ruby
+name: Kiqtock gem Github action
 
-on: [push,pull_request]
+env:
+  DATABASE_URL: postgres://postgres:@localhost:5432/test
+  PGPASSWORD: postgres
+  PGUSER: postgres
+  RAILS_ENV: test
+  RAILS_MASTER_KEY: ${{ secrets.RAILS_MASTER_KEY }}
+  REDIS_URL: redis://localhost:6379/0
+
+on:
+  push:
+    branches: '*'
+  pull_request:
+    branches: [main]
 
 jobs:
   build:
     runs-on: ubuntu-latest
+
+    services:
+      db:
+        env:
+          POSTGRES_USER: postgres
+          POSTGRES_PASSWORD: postgres
+        image: postgres:latest
+        options: >-
+          --health-cmd pg_isready
+          --health-interval 10s
+          --health-timeout 5s
+          --health-retries 5
+        ports: ["5432:5432"]
+
+      redis:
+        image: redis:latest
+        ports: ["6379:6379"]
+        options: --entrypoint redis-server
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Ruby
-      uses: ruby/setup-ruby@v1
-      with:
-        ruby-version: 3.0.2
-        bundler-cache: true
-    - name: Run the default task
-      run: bundle exec rake
+      - uses: actions/checkout@v2
+
+      - name: Set up Ruby 3
+        uses: ruby/setup-ruby@v1
+        with:
+          ruby-version: '3.0.2'
+          bundler-cache: true
+
+      - name: Run Bundler
+        run: bundle install
+
+      - name: Build and test with minitest and rspec
+        run: |
+          bundle exec rspec
