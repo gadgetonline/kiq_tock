@@ -31,6 +31,12 @@ module Kiqtock
       schedule
     end
 
+    def interpret(field, value)
+      return ANY unless value.presence?
+
+
+    end
+
     def jobs
       jobs_yaml.values.compact.map do |job|
         {
