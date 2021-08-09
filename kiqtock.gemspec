@@ -15,9 +15,10 @@ Gem::Specification.new do |spec|
   spec.email         = ['martin.streicher@gadget.consulting']
   spec.executables   = spec.files.grep(%r{\Aexe/}) { |f| File.basename(f) }
 
-  spec.files = Dir.chdir(File.expand_path(__dir__)) do
-    `git ls-files -z`.split("\x0").reject { |f| f.match(%r{\A(?:test|spec|features)/}) }
-  end
+  spec.files =
+    Dir.chdir(File.expand_path(__dir__)) do
+      `git ls-files -z`.split("\x0").reject { |f| f.match(%r{\A(?:test|spec|features)/}) }
+    end
 
   spec.homepage      = 'https://github.com/gadgetonline/kiqtock'
   spec.license       = 'MIT'

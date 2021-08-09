@@ -13,6 +13,22 @@ Layout/HashAlignment:
 Layout/LineLength:
   Max: 100
 
+Layout/MultilineArrayLineBreaks:
+  Enabled: true
+
+Layout/MultilineAssignmentLayout:
+  Enabled: true
+
+Layout/MultilineHashKeyLineBreaks:
+  Enabled: true
+
+Layout/MultilineMethodArgumentLineBreaks:
+  Enabled: true
+
+Layout/TrailingWhitespace:
+  AllowInHeredoc: false
+  Enabled: true
+
 RSpec/ExampleLength:
   Max: 10
 
