@@ -6,6 +6,10 @@ AllCops:
   NewCops: enable
   TargetRubyVersion: 3.0
 
+Layout/HashAlignment:
+  EnforcedColonStyle: table
+  EnforcedHashRocketStyle: table
+
 Layout/LineLength:
   Max: 100
 

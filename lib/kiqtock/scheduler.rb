@@ -41,9 +41,9 @@ module Kiqtock
     def jobs
       jobs_yaml.values.compact.map do |job|
         {
-          class_name: job[:job],
+          class_name:  job[:job],
           retry_count: (job[:retries] || 0).to_i,
-          schedule: determine_schedule(job[:schedule] || {})
+          schedule:    determine_schedule(job[:schedule] || {})
         }
       end
     end

@@ -15,16 +15,16 @@ module Kiqtock
 
     MONTH_OF_YEAR_SUBSTITUTIONS =
       {
-        '0' => %w[jan january],
-        '1' => %w[feb february],
-        '2' => %w[mar march],
-        '3' => %w[apr april],
-        '4' => %w[may],
-        '5' => %w[jun june],
-        '6' => %w[jul july],
-        '7' => %w[aug august],
-        '8' => %w[sep sept september],
-        '9' => %w[oct october],
+        '0'  => %w[jan january],
+        '1'  => %w[feb february],
+        '2'  => %w[mar march],
+        '3'  => %w[apr april],
+        '4'  => %w[may],
+        '5'  => %w[jun june],
+        '6'  => %w[jul july],
+        '7'  => %w[aug august],
+        '8'  => %w[sep sept september],
+        '9'  => %w[oct october],
         '10' => %w[nov november],
         '11' => %w[dec december]
       }.freeze
