@@ -3,7 +3,7 @@
 require_relative 'lib/kiqtock/version'
 
 Gem::Specification.new do |spec|
-  # spec.add_dependency "example-gem", "~> 1.0"
+  spec.add_development_dependency 'brakeman'
   spec.add_development_dependency 'byebug'
   spec.add_development_dependency 'rubocop'
   spec.add_development_dependency 'rubocop-ordered_methods'
@@ -29,6 +29,6 @@ Gem::Specification.new do |spec|
   spec.name          = 'kiqtock'
   spec.require_paths = ['lib']
   spec.required_ruby_version = '>= 3.0.0'
-  spec.summary       = 'Define peridic jobs in YAML'
+  spec.summary       = 'Define peridic jobs in readable text and YAML'
   spec.version       = Kiqtock::VERSION
 end

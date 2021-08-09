@@ -5,8 +5,9 @@ source 'https://rubygems.org'
 # Specify your gem's dependencies in kiqtock.gemspec
 gemspec
 
-gem 'rake', '~> 13.0'
-
-gem 'rspec', '~> 3.0'
-
-gem 'rubocop', '~> 1.7'
+gem 'brakeman'
+gem 'rake'
+gem 'rspec'
+gem 'rubocop'
+gem 'rubocop-ordered_methods'
+gem 'rubocop-rspec'
