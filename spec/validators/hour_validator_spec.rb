@@ -17,12 +17,12 @@ module Kiqtock
         it 'returns error if value is not an integer' do
           expect { described_class.valid?('abc') }
             .to(
-              raise_error(Kiqtock::InvalidHourError)
+              raise_error(Kiqtock::Error::InvalidHourError)
               .with_message("'abc' is not a valid hour")
             )
 
           expect { described_class.valid?(-1.0) }
-            .to raise_error(Kiqtock::InvalidHourError)
+            .to raise_error(Kiqtock::Error::InvalidHourError)
         end
       end
     end

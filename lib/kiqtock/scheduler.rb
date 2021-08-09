@@ -4,7 +4,8 @@ require 'yaml'
 
 module Kiqtock
   class Scheduler
-    CRON_FIELDS       = %i[minutes hours days_of_month months days_of_week].freeze
+    ANY               = '*'
+    CRON_FIELDS       = %i[minutes hours days_of_month days_of_week months_of_year].freeze
     DEFAULT_JOBS_FILE = File.expand_path 'sidekiq/periodic_jobs.yml'
 
     def initialize(scheduler:, jobs_file: nil)
@@ -26,21 +27,23 @@ module Kiqtock
 
     def determine_schedule(schedule)
       schedule = schedule_from_hash(schedule) if schedule.is_a?(Hash)
-      raise(SyntaxError, 'invalid cron schedule string') if schedule.split.size != CRON_FIELDS.size
+      return schedule if schedule.split.size == CRON_FIELDS.size
 
-      schedule
+      raise SyntaxError, 'invalid cron schedule string'
     end
 
     def interpret(field, value)
-      return ANY unless value.presence?
+      return ANY if (value || '').to_s.size.zero?
+
+      Kiqtock::Parser.parse(field, value).join(',')
     end
 
     def jobs
       jobs_yaml.values.compact.map do |job|
         {
-          class_name:   job[:job],
+          class_name: job[:job],
           retry_count: (job[:retries] || 0).to_i,
-          schedule:    determine_schedule(job[:schedule] || {})
+          schedule: determine_schedule(job[:schedule] || {})
         }
       end
     end
@@ -55,8 +58,8 @@ module Kiqtock
     def schedule_from_hash(hash)
       hash
         .transform_keys(&:to_sym)
-        .values_at(*CRON_FIELDS)
-        .map { |field| (field || '').size.zero? ? '*' : field }
+        .slice(*CRON_FIELDS)
+        .map { |field, value| interpret(field, value) }
         .join(' ')
     end
 

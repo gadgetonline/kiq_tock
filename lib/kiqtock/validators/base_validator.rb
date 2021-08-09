@@ -19,7 +19,7 @@ module Kiqtock
 
       def raise_error
         klass           = self.class.name.split('::').last.gsub('Validator', '')
-        exception_klass = "Kiqtock::Invalid#{klass}Error"
+        exception_klass = "Kiqtock::Error::Invalid#{klass}Error"
 
         exception_klass =
           if Object.const_defined?(exception_klass)

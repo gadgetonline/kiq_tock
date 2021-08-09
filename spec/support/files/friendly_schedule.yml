@@ -5,6 +5,6 @@ sample_job_with_friendly_syntax:
   schedule:
     hours:
     minutes: '0,30'
-    months: 'jan-june, august, 11'
+    months_of_year: 'jan-june, august, 11'
     days_of_month: '5, 10-15'
-    day_of_week: 'mon-wed, fri-sat'
+    days_of_week: 'mon-wed, fri-sat'
