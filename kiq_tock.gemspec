@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-require_relative 'lib/kiqtock/version'
+require_relative 'lib/kiq_tock/version'
 
 Gem::Specification.new do |spec|
   spec.add_development_dependency 'brakeman'
@@ -27,7 +27,7 @@ Gem::Specification.new do |spec|
   spec.metadata['source_code_uri'] = 'https://github.com/gadgetonline/kiq_tock'
   spec.metadata['changelog_uri']   = 'https://github.com/gadgetonline/kiq_tock/CHANGELOG.md.'
 
-  spec.name          = 'kiqtock'
+  spec.name          = 'kiq_tock'
   spec.require_paths = ['lib']
   spec.required_ruby_version = '>= 3.0.0'
   spec.summary       = 'Define peridic jobs in readable text and YAML'

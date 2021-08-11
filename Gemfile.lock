@@ -1,7 +1,7 @@
 PATH
   remote: .
   specs:
-    kiqtock (0.1.0)
+    kiq_tock (0.1.0)
       zeitwerk
 
 GEM
@@ -58,7 +58,7 @@ PLATFORMS
 DEPENDENCIES
   brakeman
   byebug
-  kiqtock!
+  kiq_tock!
   rake
   rspec
   rubocop

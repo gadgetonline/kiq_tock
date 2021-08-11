@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 require 'byebug'
-require 'kiqtock'
+require 'kiq_tock'
 
 Dir[File.join('support', '**', '*.rb')].each { |f| require_relative f }
 
