@@ -20,16 +20,16 @@ Gem::Specification.new do |spec|
       `git ls-files -z`.split("\x0").reject { |f| f.match(%r{\A(?:test|spec|features)/}) }
     end
 
-  spec.homepage      = 'https://github.com/gadgetonline/kiqtock'
+  spec.homepage      = 'https://github.com/gadgetonline/kiq_tock'
   spec.license       = 'MIT'
 
   spec.metadata['homepage_uri']    = spec.homepage
-  spec.metadata['source_code_uri'] = 'https://github.com/gadgetonline/kiqtock'
-  spec.metadata['changelog_uri']   = 'https://github.com/gadgetonline/kiqtock/CHANGELOG.md.'
+  spec.metadata['source_code_uri'] = 'https://github.com/gadgetonline/kiq_tock'
+  spec.metadata['changelog_uri']   = 'https://github.com/gadgetonline/kiq_tock/CHANGELOG.md.'
 
   spec.name          = 'kiqtock'
   spec.require_paths = ['lib']
   spec.required_ruby_version = '>= 3.0.0'
   spec.summary       = 'Define peridic jobs in readable text and YAML'
-  spec.version       = Kiqtock::VERSION
+  spec.version       = KiqTock::VERSION
 end

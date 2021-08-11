@@ -1,4 +1,4 @@
-name: Kiqtock gem Github action
+name: KiqTock gem Github action
 
 env:
   DATABASE_URL: postgres://postgres:@localhost:5432/test

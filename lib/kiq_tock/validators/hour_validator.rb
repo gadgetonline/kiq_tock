@@ -1,10 +1,10 @@
 # frozen_string_literal: true
 
-module Kiqtock
+module KiqTock
   module Validators
-    class DayValidator < IntegerValidator
+    class HourValidator < IntegerValidator
       MINIMUM = 0
-      MAXIMUM = 6
+      MAXIMUM = 23
     end
   end
 end

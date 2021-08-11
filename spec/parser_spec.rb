@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Kiqtock
+module KiqTock
   RSpec.describe Parser do # rubocop:disable Metrics/BlockLength
     let(:numbers)             { '0-10,11,12' }
     let(:numbers_with_spaces) { '0-10, 11, 12' }

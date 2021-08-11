@@ -2,7 +2,7 @@
 
 source 'https://rubygems.org'
 
-# Specify your gem's dependencies in kiqtock.gemspec
+# Specify your gem's dependencies in kiq_tock.gemspec
 gemspec
 
 gem 'brakeman'

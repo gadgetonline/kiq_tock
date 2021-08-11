@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
-RSpec.describe Kiqtock do
+RSpec.describe KiqTock do
   it 'has a version number' do
-    expect(Kiqtock::VERSION).not_to be(nil)
+    expect(KiqTock::VERSION).not_to be(nil)
   end
 end

@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Kiqtock
+module KiqTock
   class Parser
     DAY_OF_WEEK_SUBSTITUTIONS =
       {

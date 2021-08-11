@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Kiqtock
+module KiqTock
   module Validators
     class IntegerValidator < BaseValidator
       MINIMUM = -Float::INFINITY

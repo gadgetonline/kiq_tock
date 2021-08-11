@@ -2,7 +2,7 @@
 
 require 'yaml'
 
-module Kiqtock
+module KiqTock
   class Scheduler
     ANY               = '*'
     CRON_FIELDS       = %i[minutes hours days_of_month days_of_week months_of_year].freeze
@@ -35,7 +35,7 @@ module Kiqtock
     def interpret(field, value)
       return ANY if (value || '').to_s.size.zero?
 
-      Kiqtock::Parser.parse(field, value).join(',')
+      KiqTock::Parser.parse(field, value).join(',')
     end
 
     def jobs

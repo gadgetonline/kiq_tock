@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Kiqtock
+module KiqTock
   RSpec.describe Scheduler do
     subject(:schedule) do
       described_class.new(jobs_file: file, scheduler: sidekiq).register_jobs

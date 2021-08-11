@@ -1,6 +1,6 @@
 # frozen_string_literal: true
 
-module Kiqtock
+module KiqTock
   class Error
     class InvalidDayError    < StandardError; end
 

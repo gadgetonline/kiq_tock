@@ -1,6 +1,6 @@
 [![Ruby](https://github.com/gadgetonline/kiqtock/actions/workflows/main.yml/badge.svg)](https://github.com/gadgetonline/kiqtock/actions/workflows/main.yml)
 
-# Kiqtock
+# KiqTock
 
 Welcome to your new gem! In this directory, you'll find the files you need to be able to package up your Ruby library into a gem. Put your Ruby code in the file `lib/kiqtock`. To experiment with that code, run `bin/console` for an interactive prompt.
 
@@ -42,4 +42,4 @@ The gem is available as open source under the terms of the [MIT License](https:/
 
 ## Code of Conduct
 
-Everyone interacting in the Kiqtock project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/kiqtock/blob/main/CODE_OF_CONDUCT.md).
+Everyone interacting in the KiqTock project's codebases, issue trackers, chat rooms and mailing lists is expected to follow the [code of conduct](https://github.com/[USERNAME]/kiqtock/blob/main/CODE_OF_CONDUCT.md).
