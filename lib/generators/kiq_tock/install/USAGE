@@ -1,0 +1,7 @@
+Description:
+  Copy an empty periodic jobs schedule to the project
+
+Description
+  `rails generate kiq_tock`
+
+  This creates a file for your periodic jobs in config/periodic_jobs.yml.

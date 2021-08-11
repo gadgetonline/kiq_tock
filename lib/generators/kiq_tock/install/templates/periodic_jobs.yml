@@ -1,0 +1,16 @@
+# Define Sidekiq periodic jobs in this file. At the minimum, a periodic job
+# is the name of a Sidekiq job and a schedule. A schedule can be specified
+# with the familiar six-field cron syntax or in a newer, more readable format.
+
+# sample_job_with_cron_syntax:
+#   job: SampleJob
+#   schedule: 0 * * * *
+
+# sample_job_with_friendly_syntax:
+#   job: AnotherSampleJob
+#   schedule:
+#     hours: 9
+#     minutes: 0,30
+#     months_of_year: 'jan-june, august, 11'
+#     days_of_month: '5, 10-15'
+#     days_of_week: 'mon-wed, fri-sat'

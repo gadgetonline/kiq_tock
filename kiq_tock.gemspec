@@ -3,11 +3,11 @@
 require_relative 'lib/kiq_tock/version'
 
 Gem::Specification.new do |spec|
-  spec.add_development_dependency 'brakeman'
-  spec.add_development_dependency 'byebug'
-  spec.add_development_dependency 'rubocop'
-  spec.add_development_dependency 'rubocop-ordered_methods'
-  spec.add_development_dependency 'rubocop-rspec'
+  spec.add_development_dependency 'brakeman', '~> 5.1'
+  spec.add_development_dependency 'byebug', '~> 11.1'
+  spec.add_development_dependency 'rubocop', '~> 1.18'
+  spec.add_development_dependency 'rubocop-ordered_methods', '~> 0.9'
+  spec.add_development_dependency 'rubocop-rspec', '~> 2.4'
   spec.add_dependency 'zeitwerk'
 
   spec.authors       = ['Martin Streicher']
@@ -29,7 +29,7 @@ Gem::Specification.new do |spec|
 
   spec.name          = 'kiq_tock'
   spec.require_paths = ['lib']
-  spec.required_ruby_version = '>= 3.0.0'
+  spec.required_ruby_version = '>= 2.7'
   spec.summary       = 'Define peridic jobs in readable text and YAML'
   spec.version       = KiqTock::VERSION
 end

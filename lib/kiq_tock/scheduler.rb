@@ -1,5 +1,6 @@
 # frozen_string_literal: true
 
+require 'rails'
 require 'yaml'
 
 module KiqTock
@@ -7,6 +8,10 @@ module KiqTock
     ANY               = '*'
     CRON_FIELDS       = %i[minutes hours days_of_month days_of_week months_of_year].freeze
     DEFAULT_JOBS_FILE = File.expand_path 'sidekiq/periodic_jobs.yml'
+
+    def self.register_jobs(scheduler:, jobs_file: nil)
+      new(scheduler: scheduler, jobs_file: jobs_file).register_jobs
+    end
 
     def initialize(scheduler:, jobs_file: nil)
       @jobs_file = jobs_file
@@ -49,7 +54,9 @@ module KiqTock
     end
 
     def jobs_yaml
-      return Rails.application.config_for(:periodic_jobs) if defined?(Rails)
+      if defined?(Rails) && Rails.application
+       return Rails.application.config_for(:periodic_jobs)
+      end
 
       yaml = File.read(jobs_file || DEFAULT_JOBS_FILE)
       YAML.safe_load yaml, aliases: true, filename: jobs_file, symbolize_names: true

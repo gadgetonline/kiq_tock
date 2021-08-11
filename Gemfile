@@ -6,6 +6,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'brakeman'
+gem 'rails'
 gem 'rake'
 gem 'rspec'
 gem 'rubocop'
