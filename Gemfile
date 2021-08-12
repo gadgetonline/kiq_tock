@@ -6,6 +6,7 @@ source 'https://rubygems.org'
 gemspec
 
 gem 'brakeman'
+gem 'cli-format'
 gem 'rails'
 gem 'rake'
 gem 'rspec'

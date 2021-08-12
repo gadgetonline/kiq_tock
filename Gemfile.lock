@@ -2,7 +2,8 @@ PATH
   remote: .
   specs:
     kiq_tock (0.1.3)
-      zeitwerk
+      cli-format (~> 0.2)
+      zeitwerk (~> 2.4)
 
 GEM
   remote: https://rubygems.org/
@@ -70,6 +71,10 @@ GEM
     brakeman (5.1.1)
     builder (3.2.4)
     byebug (11.1.3)
+    cli-format (0.2.0)
+      activesupport
+      text-table
+      zeitwerk
     concurrent-ruby (1.1.9)
     crass (1.0.6)
     diff-lcs (1.4.4)
@@ -142,16 +147,16 @@ GEM
       diff-lcs (>= 1.2.0, < 2.0)
       rspec-support (~> 3.10.0)
     rspec-support (3.10.2)
-    rubocop (1.18.4)
+    rubocop (1.19.0)
       parallel (~> 1.10)
       parser (>= 3.0.0.0)
       rainbow (>= 2.2.2, < 4.0)
       regexp_parser (>= 1.8, < 3.0)
       rexml
-      rubocop-ast (>= 1.8.0, < 2.0)
+      rubocop-ast (>= 1.9.1, < 2.0)
       ruby-progressbar (~> 1.7)
       unicode-display_width (>= 1.4.0, < 3.0)
-    rubocop-ast (1.9.0)
+    rubocop-ast (1.10.0)
       parser (>= 3.0.1.1)
     rubocop-ordered_methods (0.9)
       rubocop (>= 1.0)
@@ -166,6 +171,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    text-table (1.2.4)
     thor (1.1.0)
     tzinfo (2.0.4)
       concurrent-ruby (~> 1.0)
@@ -182,6 +188,7 @@ PLATFORMS
 DEPENDENCIES
   brakeman
   byebug (~> 11.1)
+  cli-format
   kiq_tock!
   rails
   rake

@@ -5,10 +5,11 @@ require_relative 'lib/kiq_tock/version'
 Gem::Specification.new do |spec|
   spec.add_development_dependency 'brakeman', '~> 5.1'
   spec.add_development_dependency 'byebug', '~> 11.1'
-  spec.add_development_dependency 'rubocop', '~> 1.18'
+  spec.add_development_dependency 'rubocop', '~> 1.19'
   spec.add_development_dependency 'rubocop-ordered_methods', '~> 0.9'
   spec.add_development_dependency 'rubocop-rspec', '~> 2.4'
-  spec.add_dependency 'zeitwerk'
+  spec.add_dependency 'cli-format', '~> 0.2'
+  spec.add_dependency 'zeitwerk', '~> 2.4'
 
   spec.authors       = ['Martin Streicher']
   spec.bindir        = 'exe'

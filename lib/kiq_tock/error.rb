@@ -9,5 +9,7 @@ module KiqTock
     class InvalidMinuteError < StandardError; end
 
     class InvalidMonthError  < StandardError; end
+
+    class SyntaxError < StandardError; end
   end
 end
