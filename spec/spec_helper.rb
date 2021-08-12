@@ -3,8 +3,6 @@
 require 'byebug'
 require 'kiq_tock'
 
-Dir[File.join('support', '**', '*.rb')].each { |f| require_relative f }
-
 RSpec.configure do |config|
   Kernel.srand config.seed
 

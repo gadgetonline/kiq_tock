@@ -6,13 +6,7 @@ require 'yaml'
 
 module KiqTock
   class Scheduler
-    ANY                = '*'
-    CLI_ERROR_HEADERS  = %w[Description Job Error].freeze
-    CLI_FORMAT_OPTIONS = { header: true, format: 'table' }.freeze
-    CLI_JOB_HEADERS    = %w[Description Job Schedule].freeze
-    CRON_FIELDS        = %i[minutes hours days_of_month days_of_week months_of_year].freeze
     DEFAULT_JOBS_FILE  = File.expand_path 'sidekiq/periodic_jobs.yml'
-    EMPTY_SCHEDULE     = CRON_FIELDS.map { |key| [key, nil] }.to_h.freeze
 
     def self.register_jobs(scheduler:, jobs_file: nil)
       new(scheduler: scheduler, jobs_file: jobs_file).register_jobs
@@ -59,8 +53,8 @@ module KiqTock
         retries  = (job[:retries] || 0).to_i
         schedule = determine_schedule job
         presenter.rows << [job[:description], job[:job], schedule]
-      rescue NameError
-        report_or_raise_error NameError, 'Unknown job class', job
+      rescue NameError => _e
+        report_or_raise_error NameError, "Unknown job class '#{job[:job]}'", job
       ensure
         list << { class_name: job[:job], retry_count: retries, schedule: schedule }
       end
@@ -75,7 +69,7 @@ module KiqTock
     def report_or_raise_error(exception, message, job)
       error_message = message
       errors << [job[:description], job[:job], error_message]
-      return if scheduler.respond_to?(:verify?)
+      return if verify
 
       error_message = "#{error_message} in #{job[:description]}" if job[:description].present?
       raise exception, error_message
@@ -94,6 +88,10 @@ module KiqTock
       presenter.rows   = errors if errors.any?
       presenter.header = errors.any? ? CLI_ERROR_HEADERS : CLI_JOB_HEADERS
       presenter.show if presenter.rows.any?
+    end
+
+    def verify?
+      scheduler.respond_to?(:verify?) && scheduler.verify?
     end
 
     def yaml_file

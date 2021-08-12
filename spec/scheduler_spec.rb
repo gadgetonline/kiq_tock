@@ -1,10 +1,11 @@
 # frozen_string_literal: true
 
+require_relative 'support/classes/sample_job'
+require_relative 'support/classes/another_sample_job'
+
 module KiqTock
   RSpec.describe Scheduler do
-    subject(:schedule) do
-      described_class.new(jobs_file: file, scheduler: sidekiq).register_jobs
-    end
+    subject(:schedule) { described_class.register_jobs jobs_file: file, scheduler: sidekiq }
 
     let(:directory) { File.join('spec', 'support', 'files') }
     let(:sidekiq)   { double }
@@ -14,6 +15,7 @@ module KiqTock
 
       it 'registers the job correctly' do
         allow(sidekiq).to receive(:register)
+
         schedule
         expect(sidekiq).to(
           have_received(:register)
@@ -27,6 +29,7 @@ module KiqTock
 
       it 'registers the job correctly' do
         allow(sidekiq).to receive(:register)
+
         schedule
         expect(sidekiq).to(have_received(:register))
       end
