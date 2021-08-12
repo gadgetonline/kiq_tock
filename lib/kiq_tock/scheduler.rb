@@ -34,7 +34,7 @@ module KiqTock
       schedule = schedule_from_hash(schedule) if schedule.is_a?(Hash)
       return schedule if schedule.split.size == CRON_FIELDS.size
 
-      raise SyntaxError, 'invalid cron schedule string'
+      raise SyntaxError, "Invalid cron schedule string: #{schedule}"
     end
 
     def interpret(field, value)
