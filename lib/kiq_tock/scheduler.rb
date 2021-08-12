@@ -54,15 +54,15 @@ module KiqTock
     end
 
     def jobs
-      jobs_yaml.values.compact.map do |job|
+      jobs_yaml.values.compact.each_with_object([]) do |job, list|
         job[:job].constantize
         retries  = (job[:retries] || 0).to_i
         schedule = determine_schedule job
         presenter.rows << [job[:description], job[:job], schedule]
-
-        { class_name:  job[:job], retry_count: retries, schedule: schedule }
       rescue NameError
         report_or_raise_error NameError, 'Unknown job class', job
+      ensure
+        list << { class_name: job[:job], retry_count: retries, schedule: schedule }
       end
     end
 
