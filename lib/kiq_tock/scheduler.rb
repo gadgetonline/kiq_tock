@@ -32,9 +32,15 @@ module KiqTock
 
     def determine_schedule(schedule)
       schedule = schedule_from_hash(schedule) if schedule.is_a?(Hash)
-      return schedule if schedule.split.size == CRON_FIELDS.size
+byebug
+      if schedule.split.size == CRON_FIELDS.size
+        job[:job].constantize
+        return schedule
+      end
 
       raise SyntaxError, "Invalid cron schedule string: #{schedule}"
+    rescue NameError
+      raise NameError, "Unknown job: #{job[:job]}"
     end
 
     def interpret(field, value)
