@@ -35,12 +35,10 @@ module KiqTock
     def jobs
       list_of_jobs.each_with_object([]) do |job, list|
         result = ScheduleInterpreter.interpret job
-byebug
-        if result.success?
-          list.push result.job
-          presenter.rows << [job[:description], job[:job], schedule]
-          next
-        end
+        next unless result.success?
+
+        list.push result.schedule
+        presenter.rows << [job[:description], job[:job], result.schedule]
       end
     end
 
