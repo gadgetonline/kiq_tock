@@ -1,6 +1,6 @@
 sample_job_with_friendly_syntax:
   description: This is another sample job
-  job: AnotherSampleJob
+  job: SampleJob
   retries: 2
   schedule:
     hours:

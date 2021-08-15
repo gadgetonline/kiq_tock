@@ -1,7 +1,7 @@
 # frozen_string_literal: true
 
 module KiqTock
-  class Parser
+  class CronScheduleParser
     DAY_OF_WEEK_SUBSTITUTIONS =
       {
         '0' => %w[sun sunday],

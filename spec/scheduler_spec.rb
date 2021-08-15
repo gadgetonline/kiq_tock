@@ -1,8 +1,5 @@
 # frozen_string_literal: true
 
-require_relative 'support/classes/sample_job'
-require_relative 'support/classes/another_sample_job'
-
 module KiqTock
   RSpec.describe Scheduler do
     subject(:schedule) { described_class.register_jobs jobs_file: file, scheduler: sidekiq }

@@ -2,21 +2,16 @@
 
 require 'cli-format'
 require 'rails'
-require 'yaml'
 
 module KiqTock
   class Scheduler
-    DEFAULT_JOBS_FILE  = File.expand_path 'sidekiq/periodic_jobs.yml'
-
     def self.register_jobs(scheduler:, jobs_file: nil)
       new(scheduler: scheduler, jobs_file: jobs_file).register_jobs
     end
 
     def initialize(scheduler:, jobs_file: nil)
-      @errors    = []
-      @jobs_file = jobs_file
-      @presenter = CliFormat::Presenter.new CLI_FORMAT_OPTIONS
-      @scheduler = scheduler
+      @list_of_jobs = JobManifest.jobs(manifest: jobs_file)
+      @scheduler    = scheduler
     end
 
     def register_jobs
@@ -33,55 +28,40 @@ module KiqTock
 
     private
 
-    def determine_schedule(job)
-      schedule = job[:schedule] || {}
-      schedule = schedule_from_hash(schedule) if schedule.is_a?(Hash)
-      return schedule if schedule.split.size == CRON_FIELDS.size
-
-      report_or_raise_error KiqTock::Error::SyntaxError, "Invalid schedule '#{schedule}'", job
-    end
-
-    def interpret(field, value)
-      return ANY if (value || '').to_s.size.zero?
-
-      KiqTock::Parser.parse(field, value).join(',')
+    def errors
+      @errors ||= []
     end
 
     def jobs
-      jobs_yaml.values.compact.each_with_object([]) do |job, list|
-        job[:job].constantize
-        retries  = (job[:retries] || 0).to_i
-        schedule = determine_schedule job
-        presenter.rows << [job[:description], job[:job], schedule]
-      rescue NameError => _e
-        report_or_raise_error NameError, "Unknown job class '#{job[:job]}'", job
-      ensure
-        list << { class_name: job[:job], retry_count: retries, schedule: schedule }
+      list_of_jobs.each_with_object([]) do |job, list|
+        result = ScheduleInterpreter.interpret job
+byebug
+        if result.success?
+          list.push result.job
+          presenter.rows << [job[:description], job[:job], schedule]
+          next
+        end
       end
     end
 
-    def jobs_yaml
-      return Rails.application.config_for(:periodic_jobs) if defined?(Rails) && Rails.application
+    #   presenter.rows << [job[:description], job[:job], schedule]
+    # rescue NameError => _e
+    #   report_or_raise_error NameError, "Unknown job class '#{job[:job]}'", job
+    # ensure
+    #   list << { class_name: job[:job], retry_count: retries, schedule: schedule }
+    # end
 
-      YAML.safe_load yaml_file, aliases: true, filename: jobs_file, symbolize_names: true
+    def presenter
+      @presenter ||= CliFormat::Presenter.new(CLI_FORMAT_OPTIONS)
     end
 
     def report_or_raise_error(exception, message, job)
       error_message = message
       errors << [job[:description], job[:job], error_message]
-      return if verify
+      return if verify?
 
       error_message = "#{error_message} in #{job[:description]}" if job[:description].present?
       raise exception, error_message
-    end
-
-    def schedule_from_hash(hash)
-      hash
-        .transform_keys(&:to_sym)
-        .slice(*CRON_FIELDS)
-        .reverse_merge(EMPTY_SCHEDULE)
-        .map { |field, value| interpret(field, value) }
-        .join(' ')
     end
 
     def summarize
@@ -94,10 +74,6 @@ module KiqTock
       scheduler.respond_to?(:verify?) && scheduler.verify?
     end
 
-    def yaml_file
-      File.read(jobs_file || DEFAULT_JOBS_FILE)
-    end
-
-    attr_reader :errors, :jobs_file, :presenter, :scheduler
+    attr_reader :list_of_jobs, :scheduler
   end
 end
